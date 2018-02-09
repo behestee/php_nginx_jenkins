@@ -1,0 +1,34 @@
+server {
+    listen 80;
+    listen [::]:80 ipv6only=on;
+
+    underscores_in_headers on;
+
+    # Log files for Debugging
+    error_log /var/log/nginx/phpsite.dev-error.log;
+
+    # Important for VirtualBox
+    sendfile off;
+
+    # Webroot Directory for project
+    root /var/www/php_nginx_jenkins;
+    index index.php;
+
+    # Domain Name
+    server_name phpsite.dev;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    # PHP-FPM Configuration Nginx
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_cache off;
+        include fastcgi_params;
+    }
+}
