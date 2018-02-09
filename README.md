@@ -37,11 +37,13 @@ sudo ./setup_aws.sh
 ```
 
 4. Modify Domain Name as necessary:
-..* Change domain name in nginx vhost configuaration
+
+Change domain name in nginx vhost configuaration
 ```shell
 sudo vim  /etc/nginx/sites-available/nginx_vhost
 ```
-..* Change domain name in hosts file
+
+Change domain name in hosts file
 ```shell
 sudo vim /etc/hosts
 ```
@@ -62,7 +64,7 @@ sudo service nginx status
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
 
-8. Browse the domain http://ipOrDomain:8080 and configure the site
+8. Browse the domain `http://ipOrDomain:8080` and configure the site
 
 
 
